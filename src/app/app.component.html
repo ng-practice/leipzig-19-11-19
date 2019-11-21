@@ -1,1 +1,6 @@
-<app-todo-checker></app-todo-checker>
+<ws-todo-quick-add (create)="addToList($event)"></ws-todo-quick-add>
+<ws-todo-checker
+  [todo]="todo"
+  (toggle)="checkOrUncheckTodo($event)"
+  *ngFor="let todo of todos"
+></ws-todo-checker>

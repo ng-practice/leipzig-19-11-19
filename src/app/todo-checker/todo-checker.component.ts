@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Todo } from '../models/todo';
 
 @Component({
-  selector: 'app-todo-checker',
+  selector: 'ws-todo-checker',
   templateUrl: './todo-checker.component.html',
   styleUrls: ['./todo-checker.component.scss']
 })
 export class TodoCheckerComponent {
-  todo = {
-    text: 'Ride 🚴‍♀️ back 🏡',
-    isDone: false
-  };
+  @Input() todo: Todo;
+  @Output() toggle = new EventEmitter<Todo>();
 
   emitToggle() {
-    alert(`${this.todo.text} has been clicked. 🤗`);
+    this.toggle.emit(this.todo);
   }
 }
