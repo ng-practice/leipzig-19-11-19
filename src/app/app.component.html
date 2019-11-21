@@ -1,13 +1,1 @@
-<div class="todo__app">
-  <h1 class="todo__h1">Todos</h1>
-  <ws-todo-quick-add (create)="addToList($event)"></ws-todo-quick-add>
-
-  <button (click)="sortAsc()" class="todo__button--primary">Sort Asc</button>
-  <button (click)="sortDesc()" class="todo__button--primary">Sort Desc</button>
-
-  <ws-todo-checker
-    [todo]="todo"
-    (toggle)="checkOrUncheckTodo($event)"
-    *ngFor="let todo of todos"
-  ></ws-todo-checker>
-</div>
+<ws-todos></ws-todos>
