@@ -3,8 +3,7 @@ import { Todo } from './models/todo';
 
 @Component({
   selector: 'ws-todos',
-  templateUrl: './todos.component.html',
-  styleUrls: ['./todos.component.scss']
+  templateUrl: './todos.component.html'
 })
 export class TodosComponent {
   todos: Todo[] = [
