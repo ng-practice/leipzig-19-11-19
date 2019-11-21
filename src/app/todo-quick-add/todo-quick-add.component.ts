@@ -14,5 +14,7 @@ export class TodoQuickAddComponent {
       text: input.value,
       isDone: false
     });
+
+    input.value = '';
   }
 }

@@ -24,6 +24,14 @@ export class AppComponent {
 
   addToList(newTodo: Todo) {
     this.todos.push(newTodo);
+    this.sortAsc();
+  }
+
+  sortAsc() {
+    this.todos.sort((current, next) => current.text.localeCompare(next.text));
+  }
+  sortDesc() {
+    this.todos.sort((current, next) => next.text.localeCompare(current.text));
   }
 
   checkOrUncheckTodo(todoForUpdate: Todo) {
