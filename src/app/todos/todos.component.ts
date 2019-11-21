@@ -1,29 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Todo } from './models/todo';
+import { TodosService } from './shared/todos.service';
 
 @Component({
   selector: 'ws-todos',
   templateUrl: './todos.component.html'
 })
-export class TodosComponent {
-  todos: Todo[] = [
-    {
-      text: 'Make 100 🏋️‍♂️',
-      isDone: false
-    },
-    {
-      text: 'Ride to porsche 🏎',
-      isDone: true
-    },
-    {
-      text: 'Ride 🚴‍♀️ back 🏡',
-      isDone: false
-    }
-  ];
+export class TodosComponent implements OnInit {
+  todos: Todo[];
+
+  constructor(private todosService: TodosService) {}
+
+  ngOnInit(): void {
+    this.todos = this.todosService.getAllTodos();
+  }
 
   addToList(newTodo: Todo) {
-    this.todos.push(newTodo);
-    this.sortAsc();
+    this.todos = this.todosService.create(newTodo);
   }
 
   sortAsc() {
@@ -34,10 +27,6 @@ export class TodosComponent {
   }
 
   checkOrUncheckTodo(todoForUpdate: Todo) {
-    this.todos = this.todos.map(todo =>
-      todo.text === todoForUpdate.text
-        ? { ...todo, isDone: !todo.isDone }
-        : todo
-    );
+    this.todos = this.todosService.update(todoForUpdate);
   }
 }
