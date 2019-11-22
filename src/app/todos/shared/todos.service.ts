@@ -29,7 +29,6 @@ export class TodosService {
   }
 
   create(todo: Todo): Observable<Todo> {
-    todo.id = Math.random().toString();
     return this.http.post<Todo>(`http://localhost:3000/todos`, todo);
   }
 
