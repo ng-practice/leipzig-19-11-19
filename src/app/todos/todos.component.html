@@ -4,8 +4,8 @@
 
   <ws-todo-checker
     [todo]="todo"
-    (toggle)="checkOrUncheckTodo($event)"
+    (toggle)="checkOrUncheck($event)"
     (remove)="delete($event)"
-    *ngFor="let todo of todos"
+    *ngFor="let todo of todos | async | sortByText: 'asc'"
   ></ws-todo-checker>
 </div>

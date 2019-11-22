@@ -8,21 +8,6 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TodosService {
-  private todos: Todo[] = [
-    {
-      text: 'Make 100 🏋️‍♂️',
-      isDone: false
-    },
-    {
-      text: 'Ride to porsche 🏎',
-      isDone: true
-    },
-    {
-      text: 'Ride 🚴‍♀️ back 🏡',
-      isDone: false
-    }
-  ];
-
   private readonly todosApi = 'http://localhost:3000/todos';
 
   constructor(private http: HttpClient) {}
