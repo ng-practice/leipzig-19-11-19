@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +22,23 @@ export class TodosService {
     }
   ];
 
-  create(newTodo: Todo): Todo[] {
-    this.todos.push(newTodo);
-    return this.todos;
+  constructor(private http: HttpClient) {}
+
+  query(): Observable<Todo[]> {
+    return this.http.get<Todo[]>('http://localhost:3000/todos');
   }
 
-  update(todoForUpdate: Todo): Todo[] {
-    this.todos = this.todos.map(todo =>
-      todo.text === todoForUpdate.text
-        ? { ...todo, isDone: !todo.isDone }
-        : todo
-    );
-
-    return this.todos;
+  create(todo: Todo): Observable<Todo> {
+    todo.id = Math.random().toString();
+    return this.http.post<Todo>(`http://localhost:3000/todos`, todo);
   }
 
-  getAllTodos(): Todo[] {
-    return this.todos;
+  checkOrUncheck(todo: Todo): Observable<Todo> {
+    todo.isDone = !todo.isDone;
+    return this.http.put<Todo>(`http://localhost:3000/todos/${todo.id}`, todo);
+  }
+
+  delete(todo: Todo): Observable<Todo> {
+    return this.http.delete<Todo>(`http://localhost:3000/todos/${todo.id}`);
   }
 }

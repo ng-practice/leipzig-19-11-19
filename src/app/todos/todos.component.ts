@@ -12,21 +12,18 @@ export class TodosComponent implements OnInit {
   constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.todos = this.todosService.getAllTodos();
+    this.todosService.query().subscribe(todos => (this.todos = todos));
   }
 
-  addToList(newTodo: Todo) {
-    this.todos = this.todosService.create(newTodo);
+  create(todoForCreation: Todo) {
+    this.todosService.create(todoForCreation).subscribe();
   }
 
-  sortAsc() {
-    this.todos.sort((current, next) => current.text.localeCompare(next.text));
-  }
-  sortDesc() {
-    this.todos.sort((current, next) => next.text.localeCompare(current.text));
+  delete(todoForDeletion: Todo) {
+    this.todosService.delete(todoForDeletion).subscribe();
   }
 
   checkOrUncheckTodo(todoForUpdate: Todo) {
-    this.todos = this.todosService.update(todoForUpdate);
+    this.todosService.checkOrUncheck(todoForUpdate).subscribe();
   }
 }

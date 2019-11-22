@@ -9,8 +9,13 @@ import { Todo } from '../models/todo';
 export class TodoCheckerComponent {
   @Input() todo: Todo;
   @Output() toggle = new EventEmitter<Todo>();
+  @Output() remove = new EventEmitter<Todo>();
 
   emitToggle() {
     this.toggle.emit(this.todo);
+  }
+
+  emitRemove() {
+    this.remove.emit(this.todo);
   }
 }
