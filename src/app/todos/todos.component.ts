@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Todo } from './models/todo';
 import { TodosService } from './shared/todos.service';
-import { switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ws-todos',
   templateUrl: './todos.component.html'
 })
 export class TodosComponent implements OnInit, OnDestroy {
-  private sink = new Subscription();
+  private readonly sink = new Subscription();
 
   todos: Todo[];
 
@@ -23,7 +22,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     this.sink.unsubscribe();
   }
 
-  create(todoForCreation: Todo) {
+  create(todoForCreation: Todo): void {
     this.sink.add(
       this.todosService
         .create(todoForCreation)
@@ -31,7 +30,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     );
   }
 
-  delete(todoForDeletion: Todo) {
+  delete(todoForDeletion: Todo): void {
     this.sink.add(
       this.todosService
         .delete(todoForDeletion)
@@ -39,7 +38,7 @@ export class TodosComponent implements OnInit, OnDestroy {
     );
   }
 
-  checkOrUncheckTodo(todoForUpdate: Todo) {
+  checkOrUncheckTodo(todoForUpdate: Todo): void {
     this.sink.add(
       this.todosService
         .checkOrUncheck(todoForUpdate)
