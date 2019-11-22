@@ -1,37 +1,30 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Todo } from './models/todo';
-import { TodosService } from './shared/todos.service';
+import { TodosService as TodosApi } from './shared/todos-api.service';
 
 @Component({
   selector: 'ws-todos',
   templateUrl: './todos.component.html'
 })
-export class TodosComponent implements OnInit, OnDestroy {
-  private readonly sink = new Subscription();
-
+export class TodosComponent implements OnInit {
   todos: Observable<Todo[]>;
 
-  constructor(private todosService: TodosService) {}
+  constructor(private todoApi: TodosApi) {}
 
   ngOnInit(): void {
-    this.todos = this.todosService.query();
-    // this.todosService.query().subscribe(todos => (this.todos = todos));
-  }
-
-  ngOnDestroy(): void {
-    this.sink.unsubscribe();
+    this.todos = this.todoApi.query();
   }
 
   create(todoForCreation: Todo): void {
-    this.todos = this.todosService.create(todoForCreation);
+    this.todos = this.todoApi.create(todoForCreation);
   }
 
   delete(todoForDeletion: Todo): void {
-    this.todos = this.todosService.delete(todoForDeletion);
+    this.todos = this.todoApi.delete(todoForDeletion);
   }
 
   checkOrUncheck(todoForUpdate: Todo): void {
-    this.todos = this.todosService.checkOrUncheck(todoForUpdate);
+    this.todos = this.todoApi.checkOrUncheck(todoForUpdate);
   }
 }
