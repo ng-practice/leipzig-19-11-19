@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +29,22 @@ export class TodosService {
     return this.http.get<Todo[]>('http://localhost:3000/todos');
   }
 
-  create(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(`http://localhost:3000/todos`, todo);
+  create(todo: Todo): Observable<Todo[]> {
+    return this.http
+      .post<Todo>(`http://localhost:3000/todos`, todo)
+      .pipe(switchMap(() => this.query()));
   }
 
-  checkOrUncheck(todo: Todo): Observable<Todo> {
+  checkOrUncheck(todo: Todo): Observable<Todo[]> {
     todo.isDone = !todo.isDone;
-    return this.http.put<Todo>(`http://localhost:3000/todos/${todo.id}`, todo);
+    return this.http
+      .put<Todo>(`http://localhost:3000/todos/${todo.id}`, todo)
+      .pipe(switchMap(() => this.query()));
   }
 
-  delete(todo: Todo): Observable<Todo> {
-    return this.http.delete<Todo>(`http://localhost:3000/todos/${todo.id}`);
+  delete(todo: Todo): Observable<Todo[]> {
+    return this.http
+      .delete<Todo>(`http://localhost:3000/todos/${todo.id}`)
+      .pipe(switchMap(() => this.query()));
   }
 }
