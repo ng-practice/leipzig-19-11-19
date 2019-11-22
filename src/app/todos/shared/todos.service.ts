@@ -23,28 +23,30 @@ export class TodosService {
     }
   ];
 
+  private readonly todosApi = 'http://localhost:3000/todos';
+
   constructor(private http: HttpClient) {}
 
   query(): Observable<Todo[]> {
-    return this.http.get<Todo[]>('http://localhost:3000/todos');
+    return this.http.get<Todo[]>(this.todosApi);
   }
 
   create(todo: Todo): Observable<Todo[]> {
     return this.http
-      .post<Todo>(`http://localhost:3000/todos`, todo)
+      .post<Todo>(this.todosApi, todo)
       .pipe(switchMap(() => this.query()));
   }
 
   checkOrUncheck(todo: Todo): Observable<Todo[]> {
     todo.isDone = !todo.isDone;
     return this.http
-      .put<Todo>(`http://localhost:3000/todos/${todo.id}`, todo)
+      .put<Todo>(`${this.todosApi}/${todo.id}`, todo)
       .pipe(switchMap(() => this.query()));
   }
 
   delete(todo: Todo): Observable<Todo[]> {
     return this.http
-      .delete<Todo>(`http://localhost:3000/todos/${todo.id}`)
+      .delete<Todo>(`${this.todosApi}/${todo.id}`)
       .pipe(switchMap(() => this.query()));
   }
 }
