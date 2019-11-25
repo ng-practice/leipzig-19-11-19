@@ -2,10 +2,13 @@
   <h1 class="todo__h1">Todos</h1>
   <ws-todo-quick-add (create)="create($event)"></ws-todo-quick-add>
 
+  <ws-todos-link-navigation></ws-todos-link-navigation>
+
   <ws-todo-checker
     [todo]="todo"
     (toggle)="checkOrUncheck($event)"
     (remove)="delete($event)"
     *ngFor="let todo of todos | async | sortByText: 'asc'"
-  ></ws-todo-checker>
+  >
+  </ws-todo-checker>
 </div>

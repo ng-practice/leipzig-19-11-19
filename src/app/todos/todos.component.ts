@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from './models/todo';
 import { TodosService as TodosApi } from './shared/todos-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ws-todos',
@@ -10,14 +12,19 @@ import { TodosService as TodosApi } from './shared/todos-api.service';
 export class TodosComponent implements OnInit {
   todos: Observable<Todo[]>;
 
-  constructor(private todoApi: TodosApi) {}
+  constructor(private route: ActivatedRoute, private todoApi: TodosApi) {}
 
   ngOnInit(): void {
-    this.todos = this.todoApi.query();
+    this.todos = this.route.paramMap.pipe(
+      switchMap(paramMap => this.todoApi.query(paramMap.get('query')))
+    );
   }
 
   create(todoForCreation: Todo): void {
-    this.todos = this.todoApi.create(todoForCreation);
+    this.todos = this.todoApi.create(todoForCreation).pipe(
+      switchMap(() => this.route.paramMap),
+      switchMap(paramMap => this.todoApi.query(paramMap.get('query')))
+    );
   }
 
   delete(todoForDeletion: Todo): void {

@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { SortByTextPipe } from './shared/sort-by-text.pipe';
 import { TodoCheckerComponent } from './todo-checker/todo-checker.component';
 import { TodoQuickAddComponent } from './todo-quick-add/todo-quick-add.component';
+import { TodosRoutingModule } from './todos-routing.module';
 import { TodosComponent } from './todos.component';
-import { SortByTextPipe } from './shared/sort-by-text.pipe';
+import { TodosLinkNavigationComponent } from './todos-link-navigation/todos-link-navigation.component';
 
 @NgModule({
   declarations: [
     TodoCheckerComponent,
     TodosComponent,
     TodoQuickAddComponent,
-    SortByTextPipe
+    SortByTextPipe,
+    TodosLinkNavigationComponent
   ],
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, TodosRoutingModule],
   exports: [TodosComponent]
 })
 export class TodosModule {}
