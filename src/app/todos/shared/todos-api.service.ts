@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Todo } from '../models/todo';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Todo } from '../models/todo';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,10 @@ export class TodosService {
   private readonly todosApi = 'http://localhost:3000/todos';
 
   constructor(private http: HttpClient) {}
+
+  getById(id: string): Observable<Todo> {
+    return this.http.get<Todo>(`${this.todosApi}/${id}`);
+  }
 
   query(param?: string): Observable<Todo[]> {
     return this.http.get<Todo[]>(
