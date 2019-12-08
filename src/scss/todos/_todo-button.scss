@@ -8,4 +8,9 @@
   font: 300 16px Roboto, sans-serif;
   cursor: pointer;
   text-transform: uppercase;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $control-background-color;
+  }
 }
