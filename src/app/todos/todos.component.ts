@@ -57,6 +57,10 @@ export class TodosComponent implements OnInit, OnDestroy {
       .subscribe(todos => (this.todos = todos));
   }
 
+  navigateToEditPage(todo: Todo) {
+    console.log(`Edit ${todo.text}.`);
+  }
+
   ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();

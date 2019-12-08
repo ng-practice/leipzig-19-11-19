@@ -8,6 +8,7 @@
     [todo]="todo"
     (toggle)="checkOrUncheck($event)"
     (remove)="delete($event)"
+    (edit)="navigateToEditPage($event)"
     *ngFor="let todo of todos | sortByText: 'asc'"
   >
   </ws-todo-checker>
