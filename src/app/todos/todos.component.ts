@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Todo } from './models/todo';
@@ -13,7 +13,11 @@ export class TodosComponent implements OnInit, OnDestroy {
   destroy = new Subject<void>();
   todos: Todo[] = [];
 
-  constructor(private route: ActivatedRoute, private todoApi: TodosApi) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private todoApi: TodosApi
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap
@@ -58,7 +62,7 @@ export class TodosComponent implements OnInit, OnDestroy {
   }
 
   navigateToEditPage(todo: Todo) {
-    console.log(`Edit ${todo.text}.`);
+    this.router.navigate(['..', 'todo', 'edit', todo.id]);
   }
 
   ngOnDestroy() {

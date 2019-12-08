@@ -116,10 +116,6 @@
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 
-  &::hover {
-    opacity: 1;
-  }
-
   &:before {
     content: '';
     position: absolute;
