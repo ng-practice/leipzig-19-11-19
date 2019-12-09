@@ -11,7 +11,7 @@ export class TodoQuickAddComponent {
   text = new FormControl('', [
     Validators.required,
     Validators.minLength(1),
-    Validators.pattern(/^@.+/)
+    Validators.pattern(/^@(.?)+/)
   ]);
 
   @Output() create = new EventEmitter<Todo>();

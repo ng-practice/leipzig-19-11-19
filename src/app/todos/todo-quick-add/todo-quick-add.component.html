@@ -13,3 +13,12 @@
 >
   Add
 </button>
+
+<div>
+  <small *ngIf="text.dirty && text.hasError('required')">
+    Text is required.
+  </small>
+  <small *ngIf="text.dirty && text.hasError('pattern')">
+    Text must start with @.
+  </small>
+</div>
