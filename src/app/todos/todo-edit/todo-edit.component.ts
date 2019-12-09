@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -15,11 +15,12 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   todoEditForm = this.declareEditForm();
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private todosService: TodosService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fillEditForm();
   }
 
@@ -27,15 +28,15 @@ export class TodoEditComponent implements OnInit, OnDestroy {
     this.sink.unsubscribe();
   }
 
-  updateTodo() {
+  updateTodo(): void {
     this.sink = this.todosService.update(this.todoEditForm.value).subscribe();
   }
 
   private declareEditForm(): FormGroup {
-    return new FormGroup({
-      id: new FormControl(null, Validators.required),
-      text: new FormControl('', Validators.required),
-      isDone: new FormControl(false)
+    return this.fb.group({
+      id: [null, Validators.required],
+      text: ['', Validators.required],
+      isDone: [false]
     });
   }
 
