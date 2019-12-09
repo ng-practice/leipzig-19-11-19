@@ -25,6 +25,10 @@ export class TodosService {
     return this.http.post<Todo>(this.todosApi, todo);
   }
 
+  update(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`${this.todosApi}/${todo.id}`, todo);
+  }
+
   checkOrUncheck(todo: Todo): Observable<Todo> {
     todo.isDone = !todo.isDone;
     return this.http.put<Todo>(`${this.todosApi}/${todo.id}`, todo);

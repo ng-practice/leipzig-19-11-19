@@ -1,11 +1,21 @@
 <div class="todo__app">
   <h1 class="todo__h1">Edit Todo</h1>
   <a routerLink="/todos/all">Back to list</a>
-  Please implement form here.
 
-  <pre>
-    <code>
-      {{ todo | json }}
-    </code>
-  </pre>
+  <form [formGroup]="todoEditForm" (ngSubmit)="updateTodo()">
+    <input formControlName="text" type="text" class="todo__input" />
+    <label class="todo__label">
+      Is Done
+      <input formControlName="isDone" type="checkbox" />
+      <span class="todo__checkmark"></span>
+    </label>
+
+    <button
+      [disabled]="todoEditForm.invalid"
+      type="submit"
+      class="todo__button--primary"
+    >
+      Update
+    </button>
+  </form>
 </div>
