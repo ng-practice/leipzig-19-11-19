@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Todo } from '../models/todo';
 
 @Component({
@@ -7,14 +8,24 @@ import { Todo } from '../models/todo';
   styleUrls: ['./todo-quick-add.component.scss']
 })
 export class TodoQuickAddComponent {
+  text = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1),
+    Validators.pattern(/^@.+/)
+  ]);
+
   @Output() create = new EventEmitter<Todo>();
 
-  emitCreate(input: HTMLInputElement) {
+  emitCreate() {
+    if (this.text.invalid) {
+      return;
+    }
+
     this.create.emit({
-      text: input.value,
+      text: this.text.value,
       isDone: false
     });
 
-    input.value = '';
+    this.text.reset();
   }
 }

@@ -10,6 +10,11 @@ export class SortByTextPipe implements PipeTransform {
       return [];
     }
 
+    // todo.text === undefined || todo.text === null || todo.text === '' vs. !todo.text
+    if (todos.some(todo => !todo.text)) {
+      return todos;
+    }
+
     if (args === 'asc') {
       return todos.sort((current, next) =>
         current.text.localeCompare(next.text)

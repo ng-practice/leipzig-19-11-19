@@ -1,11 +1,15 @@
 <input
-  #todoText
+  [formControl]="text"
+  (keydown.enter)="emitCreate()"
   type="text"
   class="todo__input"
   placeholder="What needs to be done?"
-  (keydown.enter)="emitCreate(todoText)"
 />
 
-<button (click)="emitCreate(todoText)" class="todo__button--primary">
+<button
+  [disabled]="text.invalid"
+  (click)="emitCreate()"
+  class="todo__button--primary"
+>
   Add
 </button>
