@@ -10,6 +10,7 @@
     (remove)="delete($event)"
     (edit)="navigateToEditPage($event)"
     *ngFor="let todo of todos | sortByText: 'asc'"
+    data-testid="todo-item"
   >
   </ws-todo-checker>
 </div>
