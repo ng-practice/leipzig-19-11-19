@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Todo } from '../models/todo';
 
 @Injectable({
@@ -16,9 +17,13 @@ export class TodosService {
   }
 
   query(param?: string): Observable<Todo[]> {
-    return this.http.get<Todo[]>(
-      `${this.todosApi}?query=${param ? param : 'all'}`
-    );
+    return this.http
+      .get<Todo[]>(`${this.todosApi}?query=${param ? param : 'all'}`)
+      .pipe(
+        catchError(() =>
+          throwError({ message: 'Please contact your IT-Support.' })
+        )
+      );
   }
 
   create(todo: Todo): Observable<Todo> {

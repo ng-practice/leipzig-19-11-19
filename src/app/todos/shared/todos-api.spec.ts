@@ -38,4 +38,21 @@ describe('service: TodosApi', () => {
       httpMock.verify();
     });
   });
+
+  describe('When an error occurs', () => {
+    it('yields a understandable message', done => {
+      service.query().subscribe({
+        error: err => {
+          expect(err.message).toBe('Please contact your IT-Support.');
+          done();
+        }
+      });
+
+      httpMock
+        .expectOne('http://localhost:3000/todos?query=all')
+        .flush(null, { status: 500, statusText: 'API hung up, sorry :(.' });
+
+      httpMock.verify();
+    });
+  });
 });
