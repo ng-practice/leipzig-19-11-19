@@ -1,6 +1,7 @@
 <input
   [formControl]="text"
   (keydown.enter)="emitCreate()"
+  data-testid="todo-text-input"
   type="text"
   class="todo__input"
   placeholder="What needs to be done?"

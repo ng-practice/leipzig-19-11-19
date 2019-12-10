@@ -27,9 +27,41 @@ describe('<ws-todo-quick-add>', () => {
         By.css('[data-testid=todo-add-button]')
       ).nativeElement;
 
-      console.log(button.outerHTML);
+      expect(button.disabled).toBe(true);
+    });
+  });
+
+  describe('When a text is given', () => {
+    it('disables the "ADD"-button if the text does not start with "@"', () => {
+      const textInput: HTMLInputElement = fixture.debugElement.query(
+        By.css('[data-testid=todo-text-input]')
+      ).nativeElement;
+
+      textInput.value = 'Buy Porsche-🥤';
+      textInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+
+      const button: HTMLButtonElement = fixture.debugElement.query(
+        By.css('[data-testid=todo-add-button]')
+      ).nativeElement;
 
       expect(button.disabled).toBe(true);
+    });
+
+    it('enables the "ADD"-button', () => {
+      const textInput: HTMLInputElement = fixture.debugElement.query(
+        By.css('[data-testid=todo-text-input]')
+      ).nativeElement;
+
+      textInput.value = '@Buy Porsche-🥤';
+      textInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+
+      const button: HTMLButtonElement = fixture.debugElement.query(
+        By.css('[data-testid=todo-add-button]')
+      ).nativeElement;
+
+      expect(button.disabled).toBe(false);
     });
   });
 });
