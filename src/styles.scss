@@ -1,7 +1,9 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,7 +21,11 @@ $porsche-accent: mat-palette($mat-pink, A200, A100, A400);
 $porsche-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$porsche-theme: mat-light-theme($porsche-primary, $porsche-accent, $porsche-warn);
+$porsche-theme: mat-light-theme(
+  $porsche-primary,
+  $porsche-accent,
+  $porsche-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -28,5 +34,11 @@ $porsche-theme: mat-light-theme($porsche-primary, $porsche-accent, $porsche-warn
 
 @import './scss/theme.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

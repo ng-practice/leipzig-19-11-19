@@ -5,6 +5,7 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -13,6 +14,8 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class HttpErrorNotifier implements HttpInterceptor {
+  constructor(private snackBar: MatSnackBar) {}
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -25,7 +28,10 @@ export class HttpErrorNotifier implements HttpInterceptor {
 
     return next.handle(clone).pipe(
       catchError(err => {
-        console.warn('HTTP: Error caught!');
+        this.snackBar.open('Sorry, API is not reachable.', 'CLOSE', {
+          duration: 8000
+        });
+
         return throwError(err);
       })
     );
