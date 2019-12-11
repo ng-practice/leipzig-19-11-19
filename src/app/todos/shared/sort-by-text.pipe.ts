@@ -16,11 +16,11 @@ export class SortByTextPipe implements PipeTransform {
     }
 
     if (args === 'asc') {
-      return todos.sort((current, next) =>
+      return [...todos].sort((current, next) =>
         current.text.localeCompare(next.text)
       );
     } else if (args === 'desc') {
-      return todos.sort((current, next) =>
+      return [...todos].sort((current, next) =>
         next.text.localeCompare(current.text)
       );
     }

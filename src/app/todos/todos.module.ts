@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { SortByTextPipe } from './shared/sort-by-text.pipe';
+import { todosReducer } from './store/todos.reducer';
 import { TodoCheckerComponent } from './todo-checker/todo-checker.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
 import { TodoQuickAddComponent } from './todo-quick-add/todo-quick-add.component';
@@ -25,7 +26,7 @@ import { TodosComponent } from './todos.component';
     HttpClientModule,
     ReactiveFormsModule,
     TodosRoutingModule,
-    StoreModule.forFeature('todos', {})
+    StoreModule.forFeature('todos', todosReducer)
   ],
   exports: [TodosComponent]
 })

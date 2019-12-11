@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Todo } from './models/todo';
@@ -23,25 +23,29 @@ export class TodosComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap
-      .pipe(
-        switchMap(paramMap => this.todoApi.query(paramMap.get('query'))),
-        takeUntil(this.destroy)
-      )
+    this.store
+      .pipe(select(state => state.todos.all))
       .subscribe(todos => (this.todos = todos));
+
+    // this.route.paramMap
+    //   .pipe(
+    //     switchMap(paramMap => this.todoApi.query(paramMap.get('query'))),
+    //     takeUntil(this.destroy)
+    //   )
+    //   .subscribe(todos => (this.todos = todos));
   }
 
   create(todoForCreation: Todo): void {
     this.store.dispatch(createTodo({ payload: todoForCreation }));
 
-    this.todoApi
-      .create(todoForCreation)
-      .pipe(
-        switchMap(() => this.route.paramMap),
-        switchMap(paramMap => this.todoApi.query(paramMap.get('query'))),
-        takeUntil(this.destroy)
-      )
-      .subscribe(todos => (this.todos = todos));
+    // this.todoApi
+    //   .create(todoForCreation)
+    //   .pipe(
+    //     switchMap(() => this.route.paramMap),
+    //     switchMap(paramMap => this.todoApi.query(paramMap.get('query'))),
+    //     takeUntil(this.destroy)
+    //   )
+    //   .subscribe(todos => (this.todos = todos));
   }
 
   delete(todoForDeletion: Todo): void {
