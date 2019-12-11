@@ -6,7 +6,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { Todo } from './models/todo';
 import { TodosService as TodosApi } from './shared/todos-api.service';
 import { TodosStore } from './store';
-import { createTodo } from './store/todos.actions';
+import { createTodo, loadAllTodos } from './store/todos.actions';
 
 @Component({
   selector: 'ws-todos',
@@ -24,6 +24,9 @@ export class TodosComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // initiate todos.effects loading todos.
+    this.store.dispatch(loadAllTodos());
+
     this.store
       .pipe(select(state => state.todos.list.all))
       .subscribe(todos => (this.todos = todos));
