@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { metaReducers, reducers } from './reducers';
 import { HttpErrorNotifier } from './shared/http-error-notifier.service';
 import { TodosModule } from './todos/todos.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +32,8 @@ import { TodosModule } from './todos/todos.module';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [
     {
