@@ -1168,6 +1168,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@ngrx/store-devtools@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-8.5.2.tgz#722b2b9d290f6b64a9bce421d1a0f283970319a3"
+  integrity sha512-3GrAAX3/J39u0AcREgWBiUwuNkZhgei+2K6/bulkAu/BHw+PJaZqq5+c+uQFvi0/aq+/8+9wjNhhCWS4Entk/Q==
+
 "@ngrx/store@^8.5.2":
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-8.5.2.tgz#18e4a39f3e7ac2ec8307653837ec3c4153bde04f"
@@ -5892,6 +5897,11 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+
+ngrx-store-logger@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/ngrx-store-logger/-/ngrx-store-logger-0.2.4.tgz#c5e266e78d1775f645548c362030e68260d2e6ba"
+  integrity sha512-caF0xmjCBApn3u6LWLcXJ3Bsfl106C84cdUsK2+aIJ/s5qg0Gk4Wlq8hKBK5vJafTqJMu9Q1t77WfSHFoNZe7Q==
 
 nice-try@^1.0.4:
   version "1.0.5"

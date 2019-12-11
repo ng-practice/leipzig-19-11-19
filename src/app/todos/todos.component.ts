@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Todo } from './models/todo';
 import { TodosService as TodosApi } from './shared/todos-api.service';
+import { createTodo } from './store/todos.actions';
 
 @Component({
   selector: 'ws-todos',
@@ -14,6 +16,7 @@ export class TodosComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
 
   constructor(
+    private store: Store<any>,
     private router: Router,
     private route: ActivatedRoute,
     private todoApi: TodosApi
@@ -29,6 +32,8 @@ export class TodosComponent implements OnInit, OnDestroy {
   }
 
   create(todoForCreation: Todo): void {
+    this.store.dispatch(createTodo({ payload: todoForCreation }));
+
     this.todoApi
       .create(todoForCreation)
       .pipe(

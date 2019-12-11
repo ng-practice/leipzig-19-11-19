@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 import { SortByTextPipe } from './shared/sort-by-text.pipe';
 import { TodoCheckerComponent } from './todo-checker/todo-checker.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
@@ -23,7 +24,8 @@ import { TodosComponent } from './todos.component';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TodosRoutingModule
+    TodosRoutingModule,
+    StoreModule.forFeature('todos', {})
   ],
   exports: [TodosComponent]
 })
