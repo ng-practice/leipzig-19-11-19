@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Todo } from './models/todo';
 import { TodosService as TodosApi } from './shared/todos-api.service';
+import { TodosStore } from './store';
 import { createTodo } from './store/todos.actions';
 
 @Component({
@@ -16,7 +17,7 @@ export class TodosComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
 
   constructor(
-    private store: Store<any>,
+    private store: Store<TodosStore>,
     private router: Router,
     private route: ActivatedRoute,
     private todoApi: TodosApi
@@ -24,7 +25,7 @@ export class TodosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store
-      .pipe(select(state => state.todos.all))
+      .pipe(select(state => state.todos.list.all))
       .subscribe(todos => (this.todos = todos));
 
     // this.route.paramMap
