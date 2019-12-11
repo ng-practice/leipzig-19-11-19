@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpErrorNotifier } from './shared/http-error-notifier.service';
 import { TodosModule } from './todos/todos.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, TodosModule, AppRoutingModule],
+  imports: [BrowserModule, TodosModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
