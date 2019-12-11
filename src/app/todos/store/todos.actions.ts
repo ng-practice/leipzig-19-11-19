@@ -15,3 +15,18 @@ export const createTodo = createAction(
   '[Todo] Create Todo',
   props<{ payload: Todo }>()
 );
+
+export const updateTodo = createAction(
+  '[Todo] Update Todo',
+  props<{ payload: Todo }>()
+);
+
+export const toggleCompleteTodo = createAction(
+  '[Todo] Toggle complete Todo',
+  props<{ payload: Todo }>()
+);
+
+export const deleteTodo = createAction(
+  '[Todo] Delete Todo',
+  props<{ payload: Todo }>()
+);

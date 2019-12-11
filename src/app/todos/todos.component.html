@@ -9,7 +9,7 @@
     (toggle)="checkOrUncheck($event)"
     (remove)="delete($event)"
     (edit)="navigateToEditPage($event)"
-    *ngFor="let todo of todos | sortByText: 'asc'"
+    *ngFor="let todo of todos | async | sortByText: 'asc'"
     data-testid="todo-item"
   >
   </ws-todo-checker>

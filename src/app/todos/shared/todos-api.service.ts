@@ -35,8 +35,10 @@ export class TodosService {
   }
 
   checkOrUncheck(todo: Todo): Observable<Todo> {
-    todo.isDone = !todo.isDone;
-    return this.http.put<Todo>(`${this.todosApi}/${todo.id}`, todo);
+    return this.http.put<Todo>(`${this.todosApi}/${todo.id}`, {
+      ...todo,
+      isDone: !todo.isDone
+    });
   }
 
   delete(todo: Todo): Observable<Todo> {
