@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { TodosService } from '../shared/todos-api.service';
 import {
+  createTodo,
   loadAllTodos,
   loadAllTodosComplete,
   loadAllTodosError
@@ -17,6 +18,14 @@ export class TodosEffects {
       switchMap(() => this.todosService.query()),
       map(todos => loadAllTodosComplete({ payload: todos })),
       catchError(() => of(loadAllTodosError()))
+    )
+  );
+
+  create = createEffect(() =>
+    this.actions.pipe(
+      ofType(createTodo),
+      switchMap(({ payload }) => this.todosService.create(payload)),
+      map(() => loadAllTodos())
     )
   );
 
